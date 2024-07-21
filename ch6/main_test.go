@@ -66,6 +66,28 @@ func TestQueue(t *testing.T) {
 		assertEquality(t, got, "")
 		assertError(t, err, ErrEmptyQueue)
 	})
+
+	t.Run("Test Empty", func(t *testing.T) {
+		t.Run("Non Empty queue", func(t *testing.T) {
+			q := &Queue{}
+
+			q.Enque("Ahmad")
+			got := q.Empty()
+			
+			assertBooleanEquality(t, got, false)
+		})	
+
+		t.Run("Empty queue", func(t *testing.T) {
+			q := &Queue{}
+			assertBooleanEquality(t, q.Empty(), true)
+		})
+	})
+}
+
+func assertBooleanEquality(t testing.TB, got, want bool) {
+	if got != want {
+		t.Errorf("got '%v' want '%v'", got, want)
+	}
 }
 
 func assertEquality(t testing.TB, got, want string) {
